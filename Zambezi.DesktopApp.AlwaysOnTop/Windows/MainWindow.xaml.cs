@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zambezi.DesktopApp.AlwaysOnTop.Classes;
+using System.Runtime.InteropServices;
 
 namespace Zambezi.DesktopApp.AlwaysOnTop.Windows
 {
@@ -28,6 +30,25 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Windows
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<IntPtr, string> lWindow in WindowHelper.GetOpenWindows())
+            {
+                IntPtr lHandle = lWindow.Key;
+                string lTitle = lWindow.Value;
+
+                Console.WriteLine("{0}: {1}", lHandle, lTitle);
+
+                RECT rect = new RECT();
+                WindowHelper.GetWindowRect(new HandleRef(this, lHandle), out rect);
+                bool makeTopmost = false;
+                WindowHelper.SetWindowPos(lHandle,
+             makeTopmost ? WindowHelper.HWND_TOPMOST : WindowHelper.HWND_NOTOPMOST,
+             rect.X, rect.Y, rect.Width, rect.Height,
+             WindowHelper.SWP_SHOWWINDOW);
+            }
         }
     }
 }
