@@ -21,7 +21,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
             <Button Name="makeTop" Margin="5" Width="100" >Make Top</Button>
             <Button Name="makeUnTop" Margin="5" Width="100" >Un-Top</Button>
-            <Button Name="Close" Margin="5" Width="100" >Close</Button>
+            <Button Name="Close" Margin="5" Width="100" Click="Close_Click" >Close</Button>
         </StackPanel>
     </Grid>
 </Window>
