@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Zambezi.DesktopApp.AlwaysOnTop.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Always on Top" Height="350" Width="650" Topmost="True" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" Icon="/Zambezi.DesktopApp.AlwaysOnTop;component/Images/Misc Tools.ico"  >
+        Title="Always on Top" Height="450" Width="650" Topmost="True" ShowInTaskbar="True" WindowStartupLocation="CenterScreen" Icon="/Zambezi.DesktopApp.AlwaysOnTop;component/Images/Misc Tools.ico"  >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -24,7 +24,7 @@
                     </GridViewColumn>
 
                     <GridViewColumn DisplayMemberBinding="{Binding WindowHandle}" Header="Window Handle" Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding WindowTilte}" Header="Window Title" Width="400" />
+                    <GridViewColumn DisplayMemberBinding="{Binding WindowTilte}" Header="Window Title" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}, Path=ActualWidth}" />
                 </GridView>
             </ListView.View>
         </ListView>
