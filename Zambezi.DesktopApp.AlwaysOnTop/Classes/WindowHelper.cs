@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Zambezi.DesktopApp.AlwaysOnTop.BusinessEntities;
 
 namespace Zambezi.DesktopApp.AlwaysOnTop.Classes
 {
@@ -13,10 +14,11 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Classes
         /// <summary>Returns a dictionary that contains the handle and title of all the open windows.</summary>
         /// <returns>A dictionary that contains the handle and title of all the open windows.</returns>
 
-        public static IDictionary<IntPtr, string> GetOpenWindows()
+        public static List<AppWindow> GetOpenAppWindows()
         {
             IntPtr lShellWindow = GetShellWindow();
-            Dictionary<IntPtr, string> lWindows = new Dictionary<IntPtr, string>();
+            List<AppWindow> _result = new List<AppWindow>();
+            
 
             EnumWindows(delegate(IntPtr hWnd, int lParam)
             {
@@ -29,12 +31,12 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Classes
                 StringBuilder lBuilder = new StringBuilder(lLength);
                 GetWindowText(hWnd, lBuilder, lLength + 1);
 
-                lWindows[hWnd] = lBuilder.ToString();
+                _result.Add(new AppWindow { WindowHandle = hWnd, WindowTilte = lBuilder.ToString() });
                 return true;
 
             }, 0);
 
-            return lWindows;
+            return _result;
         }
 
         delegate bool EnumWindowsProc(IntPtr hWnd, int lParam);
