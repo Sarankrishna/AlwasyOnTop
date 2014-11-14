@@ -8,7 +8,11 @@ namespace Zambezi.DesktopApp.AlwaysOnTop
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public DelegateCommand(Action<object> execute)
             : this(execute, null)
@@ -21,14 +25,6 @@ namespace Zambezi.DesktopApp.AlwaysOnTop
         {
             _execute = execute;
             _canExecute = canExecute;
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            if (CanExecuteChanged != null)
-            {
-                CanExecuteChanged(this, EventArgs.Empty);
-            }
         }
 
 

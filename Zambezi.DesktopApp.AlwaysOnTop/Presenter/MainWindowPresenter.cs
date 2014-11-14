@@ -37,7 +37,7 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Presenter
 
         private bool UnMarkAllCommandCanExcute(object obj)
         {
-            return true;
+            return _dataModel != null && _dataModel.AppWindows != null && _dataModel.AppWindows.Count > 0;;
         }
 
         private void UnMarkAllCommandExecuted(object obj)
@@ -47,7 +47,7 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Presenter
 
         private bool MarkAllCommandCanExcute(object obj)
         {
-            return true;
+            return _dataModel != null && _dataModel.AppWindows != null && _dataModel.AppWindows.Count > 0;
         }
 
         private void MarkAllCommandExecuted(object obj)
@@ -75,7 +75,7 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Presenter
 
         private bool MakeUnTopCommandCanExcute(object obj)
         {
-            return true;
+            return _dataModel != null && _dataModel.AppWindows != null && _dataModel.AppWindows.Count(a => a.Selected) > 0;
         }
 
         private void MakeAlwaysOnTopCommandExecuted(object obj)
@@ -85,7 +85,7 @@ namespace Zambezi.DesktopApp.AlwaysOnTop.Presenter
 
         private bool MakeAlwaysOnTopCommandCanExcute(object obj)
         {
-            return true;
+            return _dataModel != null && _dataModel.AppWindows != null && _dataModel.AppWindows.Count(a => a.Selected) > 0;
         }
 
         public void LoadData()
